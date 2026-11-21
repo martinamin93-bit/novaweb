@@ -8,7 +8,7 @@ Aluno: Emerson Martin Amin Junior
 
 - aulaHTML12 - tela de login (login.html, login.css, login.js)
 - aulaHTML13 - cadastro e perfil com radio, checkbox, select e textarea (cadastro.html, perfil.html, main.css, main.js)
-- aulaHTML15 - JavaScript aplicado a formulários: onsubmit, captura em tempo real e validação (index.html, main.css, main.js)
+- aulaHTML15 - JavaScript aplicado a formulários: os 10 desafios da aula (index.html, main.css, main.js)
 
 ## Como abrir
 

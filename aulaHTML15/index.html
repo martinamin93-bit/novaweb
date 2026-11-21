@@ -7,62 +7,189 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 </head>
-<body class="bg-light">
+<body>
     <main class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h1 class="h4 mb-3">Solicitação de orçamento</h1>
-                        <p class="text-muted">NovaWeb Studio - preencha os dados abaixo.</p>
+        <h1 class="h3 mb-1">Aula 15 - JavaScript aplicado a Formulários</h1>
+        <p class="text-secondary">Desafios 1 a 10 - Emerson Martin Amin Junior</p>
 
-                        <!-- onsubmit chama a função antes do envio; se ela devolver false, o envio é cancelado -->
-                        <form id="formOrcamento" action="#" method="post" novalidate onsubmit="return validarFormulario(event)">
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome completo</label>
-                                <input type="text" class="form-control" id="nome" name="nome">
-                                <div class="invalid-feedback" id="erroNome"></div>
-                            </div>
+        <div class="row g-4">
 
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email">
-                                <div class="invalid-feedback" id="erroEmail"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="telefone" class="form-label">Telefone</label>
-                                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(17) 99999-9999" maxlength="15">
-                                <div class="invalid-feedback" id="erroTelefone"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="senha" class="form-label">Senha de acompanhamento</label>
-                                <input type="password" class="form-control" id="senha" name="senha">
-                                <div class="form-text" id="forca">Força da senha: -</div>
-                                <div class="invalid-feedback" id="erroSenha"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="mensagem" class="form-label">Descreva o site que você precisa</label>
-                                <textarea class="form-control" id="mensagem" name="mensagem" rows="4" maxlength="300"></textarea>
-                                <div class="form-text" id="contador">0 / 300 caracteres</div>
-                                <div class="invalid-feedback" id="erroMensagem"></div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            <!-- Desafio 1 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">1. Contador de caracteres</h2>
+                        <form id="formComentario">
+                            <label for="comentario" class="form-label">Comentário</label>
+                            <textarea id="comentario" class="form-control" rows="3" maxlength="140"></textarea>
+                            <p id="contador" class="mt-2 mb-2">140</p>
+                            <button type="submit" id="btnComentario" class="btn btn-primary">Enviar</button>
                         </form>
-
-                        <!-- prévia montada em tempo real com o que a pessoa digita -->
-                        <div class="previa mt-4">
-                            <h2 class="h6">Prévia em tempo real</h2>
-                            <p id="previa" class="mb-0 text-muted">Comece a digitar para ver a prévia.</p>
-                        </div>
-
-                        <div class="alert alert-success mt-3 d-none" id="sucesso">Formulário validado e enviado com sucesso!</div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Desafio 2 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">2. Confirmação de senha</h2>
+                        <form id="formSenha">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" id="senha" class="form-control mb-2">
+                            <label for="confirmaSenha" class="form-label">Confirme sua Senha</label>
+                            <input type="password" id="confirmaSenha" class="form-control">
+                            <p id="msgSenha" class="mt-2 mb-2"></p>
+                            <button type="submit" id="btnCadastrar" class="btn btn-primary" disabled>Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 3 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">3. Pedido com total automático</h2>
+                        <form id="formPedido">
+                            <label for="produto" class="form-label">Produto</label>
+                            <select id="produto" class="form-select mb-2">
+                                <option value="100">Teclado - R$ 100</option>
+                                <option value="50">Mouse - R$ 50</option>
+                                <option value="800">Monitor - R$ 800</option>
+                            </select>
+                            <label for="quantidade" class="form-label">Quantidade</label>
+                            <input type="number" id="quantidade" class="form-control" min="0" value="0">
+                            <p id="total" class="mt-2 mb-0 fw-bold">Total: R$ 0,00</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 4 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">4. Cadastro de Produto em JSON</h2>
+                        <form id="formProduto">
+                            <label for="nomeProduto" class="form-label">Nome</label>
+                            <input type="text" id="nomeProduto" class="form-control mb-2">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <input type="text" id="categoria" class="form-control mb-2">
+                            <label for="preco" class="form-label">Preço</label>
+                            <input type="number" id="preco" class="form-control mb-2" min="0" step="0.01">
+                            <button type="submit" class="btn btn-primary">Gerar JSON</button>
+                        </form>
+                        <pre id="saidaJson" class="saida mt-2 mb-0"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 5 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">5. Máscara de telefone</h2>
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" id="telefone" class="form-control" placeholder="(XX) XXXXX-XXXX" maxlength="15">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 6 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">6. Selects dependentes</h2>
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select id="departamento" class="form-select mb-2">
+                            <option value="">Selecione...</option>
+                            <option value="TI">TI</option>
+                            <option value="RH">RH</option>
+                        </select>
+                        <label for="funcionario" class="form-label">Funcionário</label>
+                        <select id="funcionario" class="form-select"></select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 7 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">7. Lista de habilidades</h2>
+                        <label for="habilidade" class="form-label">Habilidades</label>
+                        <div class="input-group">
+                            <input type="text" id="habilidade" class="form-control">
+                            <button type="button" id="btnHabilidade" class="btn btn-primary">+</button>
+                        </div>
+                        <div id="listaHabilidades" class="mt-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 8 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">8. Verificação de idade</h2>
+                        <form id="formIdade">
+                            <label for="nascimento" class="form-label">Data de nascimento</label>
+                            <input type="date" id="nascimento" class="form-control">
+                            <p id="avisoIdade" class="mt-2 mb-2 erro"></p>
+                            <button type="submit" id="btnFinalizar" class="btn btn-primary">Finalizar Cadastro</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 9 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">9. Selecionar todos</h2>
+                        <div class="form-check border-bottom pb-2 mb-2">
+                            <input type="checkbox" id="todos" class="form-check-input">
+                            <label for="todos" class="form-check-label fw-bold">Selecionar Todos</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="item1" class="form-check-input item">
+                            <label for="item1" class="form-check-label">HTML</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="item2" class="form-check-input item">
+                            <label for="item2" class="form-check-label">CSS</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="item3" class="form-check-input item">
+                            <label for="item3" class="form-check-label">JavaScript</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="item4" class="form-check-input item">
+                            <label for="item4" class="form-check-label">Bootstrap</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="item5" class="form-check-input item">
+                            <label for="item5" class="form-check-label">Git</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 10 -->
+            <section class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">10. Configurações de Perfil</h2>
+                        <div class="form-check form-switch">
+                            <input type="checkbox" id="temaEscuro" class="form-check-input">
+                            <label for="temaEscuro" class="form-check-label">Tema escuro</label>
+                        </div>
+                        <p class="text-secondary mt-2 mb-0">A escolha fica salva no navegador.</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 

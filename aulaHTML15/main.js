@@ -1,149 +1,237 @@
-// Aula 15 - JavaScript aplicado a Formulários
-// 1) evento de envio (onsubmit)  2) captura em tempo real (input)  3) regras de validação próprias
+// Aula 15 - JavaScript aplicado a Formulários - Desafios 1 a 10
 
-var nome = document.getElementById("nome");
-var email = document.getElementById("email");
-var telefone = document.getElementById("telefone");
-var senha = document.getElementById("senha");
-var mensagem = document.getElementById("mensagem");
-var previa = document.getElementById("previa");
+// ---------- Desafio 1: contador de caracteres ----------
+var comentario = document.getElementById("comentario");
 var contador = document.getElementById("contador");
-var forca = document.getElementById("forca");
-var sucesso = document.getElementById("sucesso");
+var btnComentario = document.getElementById("btnComentario");
 
-// ---------- funções de apoio ----------
-function erro(campo, idErro, texto) {
-    campo.classList.add("is-invalid");
-    campo.classList.remove("is-valid");
-    document.getElementById(idErro).textContent = texto;
-    return false;
-}
+comentario.addEventListener("input", function () {
+    var restam = 140 - comentario.value.length;
+    contador.textContent = restam;
 
-function certo(campo) {
-    campo.classList.remove("is-invalid");
-    campo.classList.add("is-valid");
-    return true;
-}
-
-// ---------- regras de validação ----------
-function validarNome() {
-    var partes = nome.value.trim().split(" ");
-    // regra própria: nome e sobrenome
-    if (partes.length < 2 || partes[0].length < 2) {
-        return erro(nome, "erroNome", "Digite nome e sobrenome.");
-    }
-    return certo(nome);
-}
-
-function validarEmail() {
-    var formato = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formato.test(email.value.trim())) {
-        return erro(email, "erroEmail", "Digite um e-mail válido.");
-    }
-    return certo(email);
-}
-
-function validarTelefone() {
-    // conta só os números: DDD + 8 ou 9 dígitos
-    var numeros = telefone.value.replace(/\D/g, "");
-    if (numeros.length < 10 || numeros.length > 11) {
-        return erro(telefone, "erroTelefone", "Digite o telefone com DDD.");
-    }
-    return certo(telefone);
-}
-
-function validarSenha() {
-    var valor = senha.value;
-    var temLetra = /[a-zA-Z]/.test(valor);
-    var temNumero = /[0-9]/.test(valor);
-    if (valor.length < 8 || !temLetra || !temNumero) {
-        return erro(senha, "erroSenha", "A senha precisa de 8 caracteres, com letra e número.");
-    }
-    return certo(senha);
-}
-
-function validarMensagem() {
-    if (mensagem.value.trim().length < 20) {
-        return erro(mensagem, "erroMensagem", "Escreva pelo menos 20 caracteres.");
-    }
-    return certo(mensagem);
-}
-
-// ---------- captura em tempo real ----------
-function atualizarPrevia() {
-    if (nome.value === "" && mensagem.value === "") {
-        previa.textContent = "Comece a digitar para ver a prévia.";
+    if (restam <= 0) {
+        // o maxlength do textarea já impede de digitar mais
+        contador.classList.add("erro");
+        btnComentario.disabled = true;
     } else {
-        // textContent mostra o texto sem interpretar como HTML
-        previa.textContent = nome.value + " pediu: " + mensagem.value;
+        contador.classList.remove("erro");
+        btnComentario.disabled = false;
     }
-}
-
-nome.addEventListener("input", function () {
-    validarNome();
-    atualizarPrevia();
 });
 
-email.addEventListener("input", validarEmail);
+document.getElementById("formComentario").addEventListener("submit", function (event) {
+    event.preventDefault();
+});
 
-telefone.addEventListener("input", function () {
-    // máscara simples: (17) 99999-9999
+// ---------- Desafio 2: confirmação de senha ----------
+var senha = document.getElementById("senha");
+var confirmaSenha = document.getElementById("confirmaSenha");
+var msgSenha = document.getElementById("msgSenha");
+var btnCadastrar = document.getElementById("btnCadastrar");
+
+function conferirSenhas() {
+    if (confirmaSenha.value === "") {
+        msgSenha.textContent = "";
+        btnCadastrar.disabled = true;
+    } else if (senha.value === confirmaSenha.value) {
+        msgSenha.textContent = "As senhas coincidem";
+        msgSenha.className = "mt-2 mb-2 sucesso";
+        btnCadastrar.disabled = false;
+    } else {
+        msgSenha.textContent = "As senhas são diferentes";
+        msgSenha.className = "mt-2 mb-2 erro";
+        btnCadastrar.disabled = true;
+    }
+}
+
+senha.addEventListener("input", conferirSenhas);
+confirmaSenha.addEventListener("input", conferirSenhas);
+
+document.getElementById("formSenha").addEventListener("submit", function (event) {
+    event.preventDefault();
+});
+
+// ---------- Desafio 3: total do pedido ----------
+var produto = document.getElementById("produto");
+var quantidade = document.getElementById("quantidade");
+var total = document.getElementById("total");
+
+function calcularTotal() {
+    var preco = Number(produto.value);
+    var qtd = Number(quantidade.value);
+    if (qtd < 0) {
+        qtd = 0;
+    }
+    var valor = preco * qtd;
+    // toFixed(2) deixa duas casas e o replace troca o ponto pela vírgula
+    total.textContent = "Total: R$ " + valor.toFixed(2).replace(".", ",");
+}
+
+produto.addEventListener("change", calcularTotal);
+quantidade.addEventListener("input", calcularTotal);
+
+// ---------- Desafio 4: gerar JSON ----------
+document.getElementById("formProduto").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var objeto = {
+        nome: document.getElementById("nomeProduto").value,
+        categoria: document.getElementById("categoria").value,
+        preco: Number(document.getElementById("preco").value)
+    };
+
+    var texto = JSON.stringify(objeto, null, 2);
+    console.log(texto);
+    document.getElementById("saidaJson").textContent = texto;
+});
+
+// ---------- Desafio 5: máscara de telefone ----------
+var telefone = document.getElementById("telefone");
+
+telefone.addEventListener("keyup", function () {
+    // tira tudo que não é número
     var n = telefone.value.replace(/\D/g, "").substring(0, 11);
-    if (n.length > 6) {
-        var meio = n.length === 11 ? 7 : 6;
-        telefone.value = "(" + n.substring(0, 2) + ") " + n.substring(2, meio) + "-" + n.substring(meio);
+
+    if (n.length > 7) {
+        telefone.value = "(" + n.substring(0, 2) + ") " + n.substring(2, 7) + "-" + n.substring(7);
     } else if (n.length > 2) {
         telefone.value = "(" + n.substring(0, 2) + ") " + n.substring(2);
     } else {
         telefone.value = n;
     }
-    validarTelefone();
 });
 
-senha.addEventListener("input", function () {
-    var valor = senha.value;
-    var pontos = 0;
-    if (valor.length >= 8) { pontos++; }
-    if (/[a-zA-Z]/.test(valor) && /[0-9]/.test(valor)) { pontos++; }
-    if (/[^a-zA-Z0-9]/.test(valor)) { pontos++; }
+// ---------- Desafio 6: selects dependentes ----------
+var departamento = document.getElementById("departamento");
+var funcionario = document.getElementById("funcionario");
 
-    forca.className = "form-text";
-    if (valor === "") {
-        forca.textContent = "Força da senha: -";
-    } else if (pontos <= 1) {
-        forca.textContent = "Força da senha: fraca";
-        forca.classList.add("fraca");
-    } else if (pontos === 2) {
-        forca.textContent = "Força da senha: média";
-        forca.classList.add("media");
-    } else {
-        forca.textContent = "Força da senha: forte";
-        forca.classList.add("forte");
+var pessoas = {
+    TI: ["Allan", "Beatriz", "Carlos"],
+    RH: ["Daniela", "Eduardo"]
+};
+
+departamento.addEventListener("change", function () {
+    // limpa as opções antigas
+    funcionario.innerHTML = "";
+
+    var lista = pessoas[departamento.value];
+    if (lista) {
+        for (var i = 0; i < lista.length; i++) {
+            var opcao = document.createElement("option");
+            opcao.textContent = lista[i];
+            funcionario.appendChild(opcao);
+        }
     }
-    validarSenha();
 });
 
-mensagem.addEventListener("input", function () {
-    contador.textContent = mensagem.value.length + " / 300 caracteres";
-    validarMensagem();
-    atualizarPrevia();
-});
+// ---------- Desafio 7: lista de habilidades ----------
+var habilidade = document.getElementById("habilidade");
+var listaHabilidades = document.getElementById("listaHabilidades");
 
-// ---------- evento de envio (chamado pelo onsubmit do form) ----------
-function validarFormulario(evento) {
-    // como é só front-end, não envia para servidor
-    evento.preventDefault();
-
-    var nomeOk = validarNome();
-    var emailOk = validarEmail();
-    var telefoneOk = validarTelefone();
-    var senhaOk = validarSenha();
-    var mensagemOk = validarMensagem();
-
-    if (nomeOk && emailOk && telefoneOk && senhaOk && mensagemOk) {
-        sucesso.classList.remove("d-none");
-    } else {
-        sucesso.classList.add("d-none");
+function adicionarHabilidade() {
+    var texto = habilidade.value.trim();
+    if (texto === "") {
+        return;
     }
-    return false;
+
+    var balao = document.createElement("span");
+    balao.className = "balao";
+    balao.textContent = texto;
+
+    var fechar = document.createElement("button");
+    fechar.type = "button";
+    fechar.textContent = "X";
+    fechar.addEventListener("click", function () {
+        balao.remove();
+    });
+
+    balao.appendChild(fechar);
+    listaHabilidades.appendChild(balao);
+    habilidade.value = "";
+    habilidade.focus();
 }
+
+document.getElementById("btnHabilidade").addEventListener("click", adicionarHabilidade);
+
+habilidade.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        adicionarHabilidade();
+    }
+});
+
+// ---------- Desafio 8: verificação de idade ----------
+var nascimento = document.getElementById("nascimento");
+var avisoIdade = document.getElementById("avisoIdade");
+var btnFinalizar = document.getElementById("btnFinalizar");
+
+nascimento.addEventListener("change", function () {
+    if (nascimento.value === "") {
+        avisoIdade.textContent = "";
+        btnFinalizar.disabled = false;
+        return;
+    }
+
+    // o valor vem como AAAA-MM-DD
+    var partes = nascimento.value.split("-");
+    var ano = Number(partes[0]);
+    var mes = Number(partes[1]);
+    var dia = Number(partes[2]);
+
+    var hoje = new Date();
+    var idade = hoje.getFullYear() - ano;
+
+    // se ainda não fez aniversário este ano, tira 1
+    var mesAtual = hoje.getMonth() + 1;
+    if (mesAtual < mes || (mesAtual === mes && hoje.getDate() < dia)) {
+        idade = idade - 1;
+    }
+
+    if (idade < 18) {
+        avisoIdade.textContent = "Apenas para maiores de idade";
+        btnFinalizar.disabled = true;
+    } else {
+        avisoIdade.textContent = "";
+        btnFinalizar.disabled = false;
+    }
+});
+
+document.getElementById("formIdade").addEventListener("submit", function (event) {
+    event.preventDefault();
+});
+
+// ---------- Desafio 9: selecionar todos ----------
+var todos = document.getElementById("todos");
+var itens = document.querySelectorAll(".item");
+
+todos.addEventListener("change", function () {
+    for (var i = 0; i < itens.length; i++) {
+        itens[i].checked = todos.checked;
+    }
+});
+
+for (var i = 0; i < itens.length; i++) {
+    itens[i].addEventListener("change", function () {
+        // o principal só fica marcado se todos os itens estiverem marcados
+        var marcados = document.querySelectorAll(".item:checked").length;
+        todos.checked = marcados === itens.length;
+    });
+}
+
+// ---------- Desafio 10: tema escuro com localStorage ----------
+var temaEscuro = document.getElementById("temaEscuro");
+
+// ao abrir a página, aplica o tema que ficou salvo
+if (localStorage.getItem("tema") === "escuro") {
+    document.body.classList.add("dark-theme");
+    temaEscuro.checked = true;
+}
+
+temaEscuro.addEventListener("change", function () {
+    if (temaEscuro.checked) {
+        document.body.classList.add("dark-theme");
+        localStorage.setItem("tema", "escuro");
+    } else {
+        document.body.classList.remove("dark-theme");
+        localStorage.setItem("tema", "claro");
+    }
+});
