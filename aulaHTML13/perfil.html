@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - NovaWeb Studio</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>NovaWeb Studio</h1>
+        <nav>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="perfil.html" class="ativo">Perfil</a>
+        </nav>
+    </header>
+
+    <main class="caixa">
+        <h2>Meu perfil</h2>
+
+        <form id="formPerfil" action="#" method="post" novalidate>
+            <div class="campo">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome">
+                <span class="erro" id="erroNome"></span>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+                <span class="erro" id="erroEmail"></span>
+            </div>
+
+            <!-- Botões de rádio: só uma opção -->
+            <fieldset class="campo">
+                <legend>Turno em que estuda</legend>
+                <label class="opcao"><input type="radio" name="turno" value="manha"> Manhã</label>
+                <label class="opcao"><input type="radio" name="turno" value="tarde"> Tarde</label>
+                <label class="opcao"><input type="radio" name="turno" value="noite"> Noite</label>
+                <span class="erro" id="erroTurno"></span>
+            </fieldset>
+
+            <!-- Caixas de seleção: várias opções -->
+            <fieldset class="campo">
+                <legend>Áreas de interesse</legend>
+                <label class="opcao"><input type="checkbox" name="interesse" value="html"> HTML</label>
+                <label class="opcao"><input type="checkbox" name="interesse" value="css"> CSS</label>
+                <label class="opcao"><input type="checkbox" name="interesse" value="js"> JavaScript</label>
+                <label class="opcao"><input type="checkbox" name="interesse" value="design"> Design</label>
+                <span class="erro" id="erroInteresse"></span>
+            </fieldset>
+
+            <!-- Caixa de listagem -->
+            <div class="campo">
+                <label for="nivel">Nível de experiência</label>
+                <select id="nivel" name="nivel">
+                    <option value="">Selecione...</option>
+                    <option value="iniciante">Iniciante</option>
+                    <option value="intermediario">Intermediário</option>
+                    <option value="avancado">Avançado</option>
+                </select>
+                <span class="erro" id="erroNivel"></span>
+            </div>
+
+            <!-- Campo de texto extenso -->
+            <div class="campo">
+                <label for="sobre">Sobre mim</label>
+                <textarea id="sobre" name="sobre" rows="4" maxlength="200"></textarea>
+                <small id="contador">0 / 200 caracteres</small>
+                <span class="erro" id="erroSobre"></span>
+            </div>
+
+            <button type="submit">Salvar perfil</button>
+            <p class="mensagem" id="mensagem"></p>
+        </form>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef2f7;
+    color: #333333;
+}
+
+header {
+    background-color: #1d3557;
+    color: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header h1 {
+    font-size: 20px;
+}
+
+header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 16px;
+    padding-bottom: 3px;
+}
+
+header nav a.ativo {
+    border-bottom: 2px solid #ffffff;
+}
+
+.caixa {
+    background-color: #ffffff;
+    max-width: 520px;
+    margin: 30px auto;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+    color: #1d3557;
+    margin-bottom: 20px;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+fieldset.campo {
+    border: 1px solid #b5b5b5;
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 6px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* rótulo de rádio e checkbox fica na mesma linha */
+label.opcao {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b5b5b5;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #1d3557;
+}
+
+.invalido {
+    border-color: #c1121f !important;
+}
+
+small {
+    color: #666666;
+    font-size: 12px;
+}
+
+.erro {
+    display: block;
+    color: #c1121f;
+    font-size: 13px;
+    min-height: 16px;
+    margin-top: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1d3557;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #274b7a;
+}
+
+.mensagem {
+    text-align: center;
+    color: #2a9d5c;
+    font-weight: bold;
+    margin-top: 14px;
+    min-height: 18px;
+}

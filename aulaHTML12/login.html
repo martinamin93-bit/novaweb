@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NovaWeb Studio</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="caixa">
+        <h1>Entrar</h1>
+        <p class="subtitulo">Acesse sua conta da NovaWeb Studio</p>
+
+        <!-- novalidate desliga a validação do navegador para usar a do login.js -->
+        <form id="formLogin" action="#" method="post" novalidate>
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="voce@exemplo.com">
+                <span class="erro" id="erroEmail"></span>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <!-- type="password" deixa os caracteres ocultos -->
+                <input type="password" id="senha" name="senha" placeholder="Mínimo de 6 caracteres">
+                <span class="erro" id="erroSenha"></span>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+            <p class="mensagem" id="mensagem"></p>
+        </form>
+
+        <nav class="links">
+            <a href="#">Esqueci minha senha</a>
+            <a href="#">Criar cadastro</a>
+        </nav>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

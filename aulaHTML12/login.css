@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef2f7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.caixa {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 380px;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+    color: #1d3557;
+    text-align: center;
+}
+
+.subtitulo {
+    color: #555555;
+    text-align: center;
+    margin: 8px 0 24px;
+    font-size: 14px;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333333;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b5b5b5;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #1d3557;
+}
+
+/* classes colocadas pelo login.js */
+input.invalido {
+    border-color: #c1121f;
+}
+
+input.valido {
+    border-color: #2a9d5c;
+}
+
+.erro {
+    display: block;
+    color: #c1121f;
+    font-size: 13px;
+    min-height: 16px;
+    margin-top: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1d3557;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #274b7a;
+}
+
+.mensagem {
+    text-align: center;
+    color: #2a9d5c;
+    font-weight: bold;
+    margin-top: 14px;
+    min-height: 18px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.links a {
+    color: #1d3557;
+}

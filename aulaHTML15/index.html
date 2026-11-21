@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 15 - JavaScript aplicado a Formulários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body class="bg-light">
+    <main class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h1 class="h4 mb-3">Solicitação de orçamento</h1>
+                        <p class="text-muted">NovaWeb Studio - preencha os dados abaixo.</p>
+
+                        <!-- onsubmit chama a função antes do envio; se ela devolver false, o envio é cancelado -->
+                        <form id="formOrcamento" action="#" method="post" novalidate onsubmit="return validarFormulario(event)">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" id="nome" name="nome">
+                                <div class="invalid-feedback" id="erroNome"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                                <div class="invalid-feedback" id="erroEmail"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(17) 99999-9999" maxlength="15">
+                                <div class="invalid-feedback" id="erroTelefone"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha de acompanhamento</label>
+                                <input type="password" class="form-control" id="senha" name="senha">
+                                <div class="form-text" id="forca">Força da senha: -</div>
+                                <div class="invalid-feedback" id="erroSenha"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="mensagem" class="form-label">Descreva o site que você precisa</label>
+                                <textarea class="form-control" id="mensagem" name="mensagem" rows="4" maxlength="300"></textarea>
+                                <div class="form-text" id="contador">0 / 300 caracteres</div>
+                                <div class="invalid-feedback" id="erroMensagem"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                        </form>
+
+                        <!-- prévia montada em tempo real com o que a pessoa digita -->
+                        <div class="previa mt-4">
+                            <h2 class="h6">Prévia em tempo real</h2>
+                            <p id="previa" class="mb-0 text-muted">Comece a digitar para ver a prévia.</p>
+                        </div>
+
+                        <div class="alert alert-success mt-3 d-none" id="sucesso">Formulário validado e enviado com sucesso!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

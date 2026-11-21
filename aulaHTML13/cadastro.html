@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - NovaWeb Studio</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>NovaWeb Studio</h1>
+        <nav>
+            <a href="cadastro.html" class="ativo">Cadastro</a>
+            <a href="perfil.html">Perfil</a>
+        </nav>
+    </header>
+
+    <main class="caixa">
+        <h2>Criar cadastro</h2>
+
+        <form id="formCadastro" action="#" method="post" novalidate>
+            <div class="campo">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome">
+                <span class="erro" id="erroNome"></span>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+                <span class="erro" id="erroEmail"></span>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha">
+                <span class="erro" id="erroSenha"></span>
+            </div>
+
+            <div class="campo">
+                <label for="confirmar">Confirmar senha</label>
+                <input type="password" id="confirmar" name="confirmar">
+                <span class="erro" id="erroConfirmar"></span>
+            </div>
+
+            <!-- Caixa de listagem (select) -->
+            <div class="campo">
+                <label for="cidade">Cidade</label>
+                <select id="cidade" name="cidade">
+                    <option value="">Selecione...</option>
+                    <option value="olimpia">Olímpia</option>
+                    <option value="barretos">Barretos</option>
+                    <option value="rio-preto">São José do Rio Preto</option>
+                    <option value="outra">Outra</option>
+                </select>
+                <span class="erro" id="erroCidade"></span>
+            </div>
+
+            <!-- Caixa de seleção (checkbox) -->
+            <div class="campo">
+                <label class="opcao">
+                    <input type="checkbox" id="termos" name="termos">
+                    Li e aceito os termos de uso
+                </label>
+                <span class="erro" id="erroTermos"></span>
+            </div>
+
+            <button type="submit">Cadastrar</button>
+            <p class="mensagem" id="mensagem"></p>
+        </form>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
